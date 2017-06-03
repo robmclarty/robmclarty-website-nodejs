@@ -1,0 +1,12 @@
+node_modules
+coverage
+build/**/*
+!build/.keep
+
+.npm
+.DS_Store
+
+.git
+*.log
+*.map
+*.tmp

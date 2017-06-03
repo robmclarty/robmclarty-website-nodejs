@@ -1,0 +1,61 @@
+{
+  "name": "robmclarty-website",
+  "version": "0.0.1",
+  "description": "My personal website.",
+  "author": "Rob McLarty <r@robmclarty.com> (https://robmclarty.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/robmclarty/robmclarty-website#readme",
+  "main": "server/start.js",
+  "scripts": {
+    "start": "node /server/start.js",
+    "coverage": "node_modules/.bin/instanbul cover _mocha -- --opts ./mocha.opts",
+    "test": "node_modules/.bin/mocha --opts ./mocha.opts",
+    "db:migrate": "node_modules/.bin/sequelize db:migrate",
+    "db:seed": "node_modules/.bin/sequelize db:seed:all"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robmclarty/robmclarty-website.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "react",
+    "rob",
+    "mclarty",
+    "portfolio",
+    "blog",
+    "writing"
+  ],
+  "dependencies": {
+    "argon2": "^0.16.1",
+    "aws-sdk": "^2.62.0",
+    "base64-js": "^1.2.0",
+    "body-parser": "^1.17.2",
+    "chai": "^4.0.1",
+    "chai-moment": "^0.1.0",
+    "cors": "^2.8.3",
+    "cred": "^0.5.6",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "express-rate-limit": "^2.8.0",
+    "gulp": "^3.9.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "morgan": "^1.8.2",
+    "node-fetch": "^1.7.1",
+    "pg": "^6.2.3",
+    "require-dir": "^0.3.2",
+    "sequelize": "^3.30.4",
+    "sequelize-cli": "^2.7.0",
+    "sequelize-fixtures": "^0.5.6",
+    "showdown": "^1.7.1",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2",
+    "validator": "^7.0.0",
+    "yargs": "^8.0.1"
+  }
+}
