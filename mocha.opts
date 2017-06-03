@@ -1,0 +1,5 @@
+--ui bdd
+--reporter spec
+--require ./tests/common
+--recursive ./tests
+--timeout 5000
