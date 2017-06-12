@@ -11,6 +11,11 @@ const config = require('../config/server')
 
 const app = express()
 
+// Store reusable values.
+app.set('assets-path', config.assetsPath)
+app.set('app-name', config.appName)
+app.set('port', config.port)
+
 // Setup view engine(s).
 app.engine('hbs', handlebars({
   layoutsDir: `${ __dirname }/views/layouts`,
@@ -71,6 +76,7 @@ if (process.env.NODE_ENV === ('development' || 'test')) {
 
 // Routes
 app.use('/', [
+  require('./routes/basic_routes'),
   require('./routes/blogPost_routes')
 ])
 

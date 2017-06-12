@@ -1,0 +1,123 @@
+// Colors
+$green:       #37be2f;
+$grey:        #656565;
+$light-grey:  #959595;
+$byline:      #999999;
+$bg:          #f4f4f4;
+$title:       #000000;
+
+body {
+  margin: 0;
+  padding: 0 0 2em 0;
+  font-family: MyriadPro-Regular, "Myriad Pro Regular", MyriadPro, "Myriad Pro", Helvetica, Arial, sans-serif;
+  background-color: $bg;
+  color: #656565;
+  font-size: 16px;
+}
+article {
+  margin: 2em auto;
+  width: 560px;
+  font-size: 1.1em;
+  line-height: 1.3em;
+}
+h1 {
+  color: $title;
+  font-size: 3.5em;
+  line-height: 1em;
+  margin-bottom: 0.5em;
+}
+h2{
+  color: $title;
+  font-size: 1.9em;
+  line-height: 1.2em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+img {
+  max-width: 100%;
+}
+a {
+  &:link {
+    color: $green;
+  }
+  &:visited {
+    color: $light-grey;
+  }
+  &:hover,
+  &:active {
+    color: $green;
+    background: $bg;
+  }
+  &.anchor {
+    color: $grey;
+    text-decoration: none;
+    border-bottom: 1px dotted $grey;
+  }
+  &.anchor:hover {
+    color: $grey;
+    text-decoration: none;
+    border-bottom-style: solid;
+  }
+}
+p {
+  margin: 0 0 2ex 0;
+}
+ul {
+  margin: 0 0 2ex 0;
+  padding: 0;
+}
+li {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+.portrait {
+  display: block;
+  width: 145px;
+  height: 145px;
+  overflow: hidden;
+  margin-right: 1em;
+}
+.article h1 {
+  margin-bottom: 0
+}
+.byline {
+  font-size: 14px;
+  color: $byline;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
+@media screen and (max-width: 630px) {
+  article {
+    margin: 1em auto;
+    padding: 0 1.5em;
+    width: auto;
+    word-wrap: break-word;
+  }
+  img {
+    width: auto;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  article {
+    font-size: 1em;
+    line-height: 1.2em;
+  }
+  h1 {
+    font-size: 2.5em;
+  }
+  h2 {
+    font-size: 1.6em;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.4em;
+  }
+}

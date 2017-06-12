@@ -1,8 +1,9 @@
 'use strict'
 
 module.exports = {
+  port: process.env.PORT || 3002,
   appName: process.env.APP_NAME || 'robmclarty-website',
-  port: process.env.PORT || 3000,
+  assetsPath: process.env.ASSETS_PATH || '../build',
   origin: process.env.ORIGIN || '*',
   jwt: {
     issuer: process.env.ISSUER || 'cred-auth-manager',

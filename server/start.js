@@ -5,8 +5,6 @@
 const app = require('./')
 const models = require('./models')
 
-app.set('port', process.env.PORT || 3002)
-
 // Connect to DB and start the server.
 models.sequelize.sync()
   .then(() => {
