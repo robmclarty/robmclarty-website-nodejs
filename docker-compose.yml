@@ -5,22 +5,38 @@ version: '3.1'
 # 3rd party service (e.g., RDS) and the app would be loaded into a higher-order
 # deployment (e.g., docker swarm) which would load other services as well.
 services:
+  # web:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-web
+  #   ports:
+  #     - 3080:80
+  #     - 3442:443
+  #   volumes:
+  #     - ./build:/srv/opt/app
+
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-api
     ports:
       - 3000:3000
     volumes:
       - ./server:/opt/app/server
-      - ./build:/srv/app
     depends_on:
       - db
+    links:
+      - db
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE=postgres://postgres:dbpass@db:5432/robmclarty-dev
 
   db:
     image: postgres:9.5.6
-    ports:
-      - 54322:5432
+    expose:
+      - 5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=robmclarty-dev
       - POSTGRES_PASSWORD=dbpass
-      - DATABASE=postgres://postgres:dbpass@localhost:54322/robmclarty-dev

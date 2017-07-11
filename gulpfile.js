@@ -37,7 +37,8 @@ const buildProduction = gulp.series(
     'build:styles:homepage',
     'build:assets',
     'build:html'
-  ),
+  )
+  //,
   // 'rev:assets',
   // gulp.parallel('rev:js', 'rev:css'),
   // 'rev:html'

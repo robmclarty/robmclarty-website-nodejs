@@ -1,6 +1,5 @@
 'use strict'
 
-const config = require('../../config/server')
 const blogStatusObj = require('../../server/constants/blog_status')
 const blogStatuses = Object.keys(blogStatusObj).map(status => blogStatusObj[status])
 

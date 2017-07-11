@@ -1,0 +1,37 @@
+FROM node:8.1.3-alpine
+MAINTAINER Rob McLarty <r@robmclarty.com> (https://robmclarty.com)
+
+# Install system dependencies (needed to compile some npm packages like argon2).
+RUN apk add --update make gcc g++ python git
+
+# Create app directory and allow user/group `node` to own it.
+RUN mkdir -p /opt/app && \
+    mkdir -p /srv/app && \
+    chown node:node /opt/app && \
+    chown node:node /srv/app
+
+WORKDIR /opt/app
+
+# Set the user to use when running this image.
+USER node
+
+# NOTE: node-alpine creates a group "node" and a user "node" and adds that user
+# to that group for use in running the node app as a limited-priviledge user.
+# Because this is included in the base image, we don't need to define this again
+# with the following command, so it has been commented out.
+# RUN groupadd -r node && useradd -r -g node node
+
+# Install app dependencies.
+COPY package.json package-lock.json .sequelizerc /opt/app/
+COPY config/server.js config/database.js /opt/app/config/
+COPY config/keys /opt/app/config/keys
+COPY server /opt/app/server
+COPY db /opt/app/db
+COPY build /srv/opt/app
+RUN npm install --production
+
+#RUN /opt/app/node_modules/.bin/sequelize db:seed:all
+
+# Start'er up!
+EXPOSE 3000
+CMD ["node", "./server/start.js"]

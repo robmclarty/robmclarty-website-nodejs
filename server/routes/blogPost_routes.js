@@ -22,8 +22,9 @@ router.route('/blog/:slug')
   .get(getBlogPostHTML)
 
 router.route('/api/blog-posts')
-  .get(requireReadBlogPosts, getBlogPosts)
-  .post(requireWriteBlogPosts, postBlogPosts)
+  .get(getBlogPosts)
+  // .get(requireReadBlogPosts, getBlogPosts)
+  // .post(requireWriteBlogPosts, postBlogPosts)
 
 router.route('/api/blog-posts/:id')
   .get(requireReadBlogPosts, getBlogPost)
