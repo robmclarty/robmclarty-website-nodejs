@@ -1,10 +1,15 @@
 <h1>Blog Posts</h1>
-<ul>
+<ul class="post-list">
 {{#each blogPosts}}
   <li>
     <a href="/blog/{{this.slug}}">
-      <strong>{{this.title}}</strong>
+      <h3>{{this.title}}</h3>
       <p>{{this.description}}</p>
+      <div class="post-meta">
+        <span class="post-date">{{ this.createdAt }}</span>
+        &middot;
+        <span class="post-length">{{ this.length }} min read</span>
+      </div>
     </a>
   </li>
 {{/each}}

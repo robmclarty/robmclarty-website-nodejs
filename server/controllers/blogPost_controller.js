@@ -8,6 +8,7 @@ const {
   NOT_FOUND
 } = require('../helpers/error_helper')
 const { BlogPost } = require('../models')
+const { PUBLISHED } = require('../constants/blog_status')
 const cred = require('../cred')
 
 const findBlogPostById = id => BlogPost.findById(id).then(blogPost => {
@@ -21,10 +22,18 @@ const findBlogPostById = id => BlogPost.findById(id).then(blogPost => {
 
 // GET /blog
 const getBlogPostsHTML = (req, res, next) => {
-  BlogPost.findAll()
+  BlogPost.findAll({
+    where: {
+      status: PUBLISHED
+    },
+    order: [['createdAt', 'DESC']],
+    limit: 10
+    //,
+    //offset: 10 // TODO: pagination
+  })
     .then(blogPosts => res.render('blog/index', {
       layout: 'blog',
-      blogPosts
+      blogPosts: blogPosts.map(blogPost => blogPost.toHuman())
     }))
     .catch(next)
 }
@@ -33,10 +42,15 @@ const getBlogPostsHTML = (req, res, next) => {
 const getBlogPostHTML = (req, res, next) => {
   const slug = req.params.slug
 
-  BlogPost.findOne({ where: { slug } })
+  BlogPost.findOne({
+    where: {
+      slug,
+      status: PUBLISHED
+    }
+  })
     .then(blogPost => res.render('blog/post', {
       layout: 'blog',
-      blogPost
+      blogPost: blogPost.toHuman()
     }))
     .catch(next)
 }

@@ -1,7 +1,20 @@
 'use strict'
 
+const moment = require('moment')
 const blogStatusObj = require('../../server/constants/blog_status')
 const blogStatuses = Object.keys(blogStatusObj).map(status => blogStatusObj[status])
+
+const toHuman = blogPost => ({
+  id: blogPost.id,
+  title: blogPost.title,
+  body: blogPost.body, // TODO: convert markdown to html here
+  description: blogPost.description, // TODO: need conversion?
+  pictureUrl: blogPost.pictureUrl,
+  status: blogPost.status,
+  slug: blogPost.slug,
+  length: blogPost.length,
+  createdAt: moment(blogPost.createdAt).format('MMMM Do YYYY')
+})
 
 const toJSON = blogPost => ({
   id: blogPost.id,
@@ -29,14 +42,14 @@ const BlogPostSchema = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       defaultValue: ''
     },
-    body: {
-      allowNull: true,
-      type: DataTypes.TEXT,
-      defaultValue: ''
-    },
     description: {
       allowNull: true,
       type: DataTypes.STRING,
+      defaultValue: ''
+    },
+    body: {
+      allowNull: true,
+      type: DataTypes.TEXT,
       defaultValue: ''
     },
     pictureUrl: {
@@ -49,6 +62,11 @@ const BlogPostSchema = function (sequelize, DataTypes) {
       type: DataTypes.ENUM,
       values: blogStatuses,
       defaultValue: blogStatusObj.DRAFT
+    },
+    length: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      defaultValue: 5
     },
     slug: {
       allowNull: false,
@@ -70,6 +88,9 @@ const BlogPostSchema = function (sequelize, DataTypes) {
     instanceMethods: {
       toJSON: function () {
         return toJSON(this.get())
+      },
+      toHuman: function () {
+        return toHuman(this.get())
       }
     }
   })
